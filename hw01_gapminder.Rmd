@@ -1,0 +1,46 @@
+---
+title: "hw01_gapminder"
+author: "Peter Whitman"
+date: "9/17/2017"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+```{r}
+plot(lifeExp ~ year, gapminder)
+```
+```{r}
+plot(lifeExp ~ gdpPercap, gapminder)
+```
+```{r}
+plot(lifeExp ~ log(gdpPercap), gapminder)
+```
+```{r}
+summary(gapminder$lifeExp)
+```
+
+```{r}
+hist(gapminder$lifeExp)
+```
+
+```{r}
+barplot(table(gapminder$continent))
+```
+```{r}
+p <- ggplot(filter(gapminder, continent != "Oceania"),
+            aes(x = gdpPercap, y = lifeExp)) # just initializes
+p <- p + scale_x_log10() # log the x axis the right way
+p + geom_point() # scatterplot
+p + geom_point(aes(color = continent)) # map continent to color
+p + geom_point(alpha = (1/3), size = 3) + geom_smooth(lwd = 3, se = FALSE)
+p + geom_point(alpha = (1/3), size = 3) + facet_wrap(~ continent) +
+  geom_smooth(lwd = 1.5, se = FALSE)
+```
+
+
