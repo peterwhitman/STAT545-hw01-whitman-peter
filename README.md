@@ -4,10 +4,10 @@ Hello world! This is a repository created for STAT 545 homework #1 by Peter Whit
 
 The STAT 545 homework instructions can be found [here](http://stat545.com/hw01_edit-README.html)
 
-###Introduction
+##Introduction
 * Degree program: I am a first year MSc student in geography
 * Hometown: I was born and raised in St. Paul, MN
-* Undergraduate education: I received a BA from [Carthage College](https://www.carthage.edu/) in Kenosha, WI in GIS, geoscience, and environmental science
+* Undergraduate education: I received a BA in GIS, geoscience, and environmental science from [Carthage College](https://www.carthage.edu/) in Kenosha, WI
 * Favorite non-academic activities: reading historical fiction, biking, cooking, whitewater canoeing
 
 ![](https://i.pinimg.com/736x/15/23/e5/1523e522c3450d7fb1e2e8c00b4e543f--twin-cities-minneapolis.jpg)
