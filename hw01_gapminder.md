@@ -3,6 +3,8 @@ hw01\_gapminder
 Peter Whitman
 9/17/2017
 
+### 1. Initialize gapminder and tidyverse
+
 ``` r
 library(gapminder)
 library(tidyverse)
@@ -20,11 +22,15 @@ library(tidyverse)
     ## filter(): dplyr, stats
     ## lag():    dplyr, stats
 
+### 2. Plot life expentancy by year
+
 ``` r
 plot(lifeExp ~ year, gapminder)
 ```
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-2-1.png)
+
+### 3. Plot life expentancy by GDP per capita
 
 ``` r
 plot(lifeExp ~ gdpPercap, gapminder)
@@ -32,11 +38,15 @@ plot(lifeExp ~ gdpPercap, gapminder)
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png)
 
+### 4. Plot life expentancy by log(GDP per capita)
+
 ``` r
 plot(lifeExp ~ log(gdpPercap), gapminder)
 ```
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-1.png)
+
+### 5. Provide a summary of the Life Expectancy data
 
 ``` r
 summary(gapminder$lifeExp)
@@ -45,17 +55,23 @@ summary(gapminder$lifeExp)
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
     ##   23.60   48.20   60.71   59.47   70.85   82.60
 
+### 6. Produce frequency distribution histogram for Life Expectancy
+
 ``` r
 hist(gapminder$lifeExp)
 ```
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-6-1.png)
 
+### 7. Create a frequency distribution bar plot for each continent
+
 ``` r
 barplot(table(gapminder$continent))
 ```
 
 ![](hw01_gapminder_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png)
+
+### 8. Explore the relationship between GDP and Life expectancy and the variation between continents
 
 ``` r
 p <- ggplot(filter(gapminder, continent != "Oceania"),

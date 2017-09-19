@@ -4,32 +4,46 @@ author: "Peter Whitman"
 date: "9/17/2017"
 output: github_document
 ---
-
+###1. Initialize gapminder and tidyverse
 ```{r}
 library(gapminder)
 library(tidyverse)
 ```
-
+###2. Plot life expentancy by year
 ```{r}
 plot(lifeExp ~ year, gapminder)
 ```
+
+###3. Plot life expentancy by GDP per capita
+
 ```{r}
 plot(lifeExp ~ gdpPercap, gapminder)
 ```
+
+###4. Plot life expentancy by log(GDP per capita)
+
 ```{r}
 plot(lifeExp ~ log(gdpPercap), gapminder)
 ```
+
+###5. Provide a summary of the Life Expectancy data
+
 ```{r}
 summary(gapminder$lifeExp)
 ```
-
+###6. Produce frequency distribution histogram for Life Expectancy
 ```{r}
 hist(gapminder$lifeExp)
 ```
 
+###7. Create a frequency distribution bar plot for each continent
+
 ```{r}
 barplot(table(gapminder$continent))
 ```
+
+###8. Explore the relationship between GDP and Life expectancy and the variation between continents
+
 ```{r}
 p <- ggplot(filter(gapminder, continent != "Oceania"),
             aes(x = gdpPercap, y = lifeExp)) # just initializes
