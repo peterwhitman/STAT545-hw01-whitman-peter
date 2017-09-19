@@ -35,7 +35,7 @@ The STAT 545 homework instructions can be found [here](http://stat545.com/hw01_e
 9. I also added some headers to the gapminder.Rmd to denote each function
 8. To produce a .md file instead of an .html file I changed the output to github_document
 
-The how01_gapminder.md file can be found [here](hw01_gapminder.md)
+The hw01_gapminder.md file can be found [here](hw01_gapminder.md)
 
 I found that at times the syntax can be tempermental. For example, when trying add headers to an .Rmd file, some headers required a buffer line above and below, but some did not. Otherwise, as always, I found referencing online forums such as StackOverflow very helpful. 
 
