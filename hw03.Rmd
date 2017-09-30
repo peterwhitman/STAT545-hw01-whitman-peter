@@ -1,5 +1,5 @@
 ---
-title: "hw02"
+title: "hw03"
 author: "Peter Whitman"
 date: "9/30/2017"
 output: github_document
@@ -9,4 +9,4 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-jjhj
+jdjdj
