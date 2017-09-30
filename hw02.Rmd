@@ -1,0 +1,11 @@
+---
+title: "hw02"
+author: "Peter Whitman"
+date: "9/30/2017"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
