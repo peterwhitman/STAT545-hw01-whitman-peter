@@ -1,8 +1,8 @@
 # STAT545-hw01-whitman-peter
 
-Hello world! This is a repository created for STAT 545 homework #1 by Peter Whitman. 
+Hello world, my name is Peter Whitman. This is a repository created for STAT 545 homework. 
 
-The STAT 545 homework instructions can be found [here](http://stat545.com/hw01_edit-README.html)
+The STAT 545 homework instructions can be found [here](http://stat545.com/syllabus.html)
 
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
@@ -22,7 +22,7 @@ The STAT 545 homework instructions can be found [here](http://stat545.com/hw01_e
 
 *Somewhere on the Kopka in Northern Ontario*
 
-## Process ##
+## hw01 Process ##
 
 1. I created a public repository online through GitHub
 2. I edited the ReadME file using the web-browser method to include a basic introduction and a link to the homework instructions 
