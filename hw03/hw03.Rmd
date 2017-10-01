@@ -7,6 +7,51 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(gapminder)
+library(knitr)
+library(tidyverse)
 ```
 
-jdjdj
+## Task Menu
+
+* Get the maximum and minimum of GDP per capita for all continents. 
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% summarize(MaxGDP = max(gdpPercap), MinGDP = min(gdpPercap)) 
+
+```
+
+```{r}
+p1 <- gapminder %>% 
+  group_by(continent) %>% summarize(MaxGDP = max(gdpPercap), MinGDP = min(gdpPercap)) 
+p2 <- p1 %>%
+    group_by(continent) %>%
+    summarise(MaxGDP = sum(MaxGDP), MinGDP = sum(MinGDP))
+p3 <- p2 %>% gather(Legend, gdpPercapita, -continent)
+ggplot(p3, aes(x = continent, fill = Legend, y = gdpPercapita)) +
+    geom_col(position = "dodge")
+```
+
+* How is life expectancy changing over time on different continents?
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% summarize(life_change = mean(lifeExp[year == 2007] - lifeExp[year == 1952]))
+
+```
+
+```{r}
+p4 <- gapminder %>% 
+  group_by(continent) %>% summarize(life_change = mean(lifeExp[year == 2007] - lifeExp[year == 1952])) %>% ggplot(aes(continent, life_change))
+p4 + geom_col()
+```
+
+```{r}
+gapminder %>% group_by(continent) %>% ggplot(aes(year, lifeExp, color = continent)) + geom_smooth()
+```
+
+* Compute a weighted mean of life expectancy for different years, weighting by population
+
+
+
