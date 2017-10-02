@@ -9,4 +9,116 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-jjhj
+```{r}
+library(gapminder)
+library(tidyverse)
+library(knitr)
+```
+###Smell test the data
+
+```{r}
+str(gapminder)
+```
+* Is it a data.frame, a matrix, a vector, a list?
+  *data.frame*
+* What’s its class?
+  *tbl_df*
+* How many variables/columns?
+  *6*
+* How many rows/observations?
+  *1704*
+* Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?
+
+```{r}
+class(gapminder)
+```
+
+```{r}
+nrow(gapminder)
+```
+
+```{r}
+ncol(gapminder)
+```
+
+*I can imagine that the alternative methods I've shown above would be useful if a user was quickly trying to become acquainted with a dataset. Emplying ncol or nrow would give you information about the extent of the dataset without all of the other somewhat superfluous information*
+
+* What data type is each variable?
+```{r}
+typeof(gapminder$country)
+typeof(gapminder$continent)
+typeof(gapminder$lifeExp)
+typeof(gapminder$year)
+typeof(gapminder$pop)
+typeof(gapminder$gdpPercap)
+```
+###Explore individual variables
+* What are possible values (or range, whichever is appropriate) of each variable?
+```{r}
+summary(gapminder)
+```
+* What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+```{r}
+barplot(table(gapminder$continent))
+```
+
+```{r}
+hist(gapminder$lifeExp)
+```
+
+###Explore various plot types
+
+* A scatterplot of two quantitative variables.
+
+```{r}
+p2 <- ggplot(gapminder, aes(x=gdpPercap, y=lifeExp))
+p2 + geom_point()
+```
+
+* A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+
+```{r}
+p3 <- ggplot(gapminder, aes(x=lifeExp)) 
+p3 + geom_density(alpha=0.3)
+```
+
+* A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
+```{r}
+p3 <- ggplot(gapminder, aes(x=lifeExp, color=continent)) 
+p3 + geom_density(alpha=0.3)
+```
+
+###Use filter(), select() and %>%
+
+* Use filter() to create data subsets that you want to plot
+
+```{r}
+filter(gapminder, year %in% 1970:1972 & country == "Albania")
+```
+
+```{r}
+filter(gapminder, pop > 500000000)
+```
+
+* Practice piping together filter() and select(). Possibly even piping into ggplot().
+
+```{r}
+t1 <- ggplot(gapminder %>% filter(country == "China" | country == "India", year > 1960) %>% select(country, year, gdpPercap), aes(x=year, y=gdpPercap, color = country)) 
+t1 + geom_line()
+```
+
+###But I want to do more!
+
+* Present numerical tables in a more attractive form, such as using knitr::kable().
+
+```{r}
+kable(filter(gapminder, country == "Algeria" & year < "1960"))
+```
+
+* Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
+
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+
+*This code chunk produces all data for Afghanistan and Rwanda. The analyst did succeed, if that was their intent.*

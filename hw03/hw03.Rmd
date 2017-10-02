@@ -85,3 +85,5 @@ gapminder %>% mutate(benchmark=c("below", "over")[(lifeExp>59.4744) + 1]) %>% gr
           y="Number of Countries Below Mean Life Expectancy Rate",
           title="Changes in Number of Countries Below Mean Life Expectancy Rate Over Time") + scale_colour_discrete("Continents of\n the World")
 ```
+
+*Interestingly, Oceania is not present in this figure, which must mean that none of the countries that make up Oceania had life expectancy rates lower than the mean*

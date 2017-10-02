@@ -1,6 +1,6 @@
 # STAT545-hw01-whitman-peter
 
-Hello world, my name is Peter Whitman. This is a repository created for STAT 545 homework. 
+Hello world, my name is Peter Whitman. This is a repository that I've created for STAT 545 homework. 
 
 The STAT 545 homework instructions can be found [here](http://stat545.com/syllabus.html)
 
@@ -39,3 +39,17 @@ The hw01_gapminder.md file can be found [here](hw01_gapminder.md)
 
 I found that at times the syntax can be tempermental. For example, when trying add headers to an .Rmd file, some headers required a buffer line above and below, but some did not. Otherwise, as always, I found referencing online forums such as StackOverflow very helpful. 
 
+## hw02 Process ##
+
+1. I created a repository on github
+2. I started a new project in RStudio and used the web URL to Connect RStudio to git and GitHub
+3. I then created a new .Rmd file locally called "hw02"
+4. I worked through hw02 in the hw02.Rmd file
+5. I then used the pull, edit locally, save, commit, push to github.com workflow
+6. Finally, I added process and reflection sections to the README.md file locally and committed them to github.com
+
+I actually had an easier time with this homework assignment than the first homework assignment. I feel more comfortable with github and Rstudio. I also found that with my background in GIS, queries and query logic are fairly straightforward.
+
+I did get an error temporarily when trying to knit my hw02.Rmd file. The problem stemed from including install.packages() in addition to library(). I used a CS forum online to resolve the issue.
+
+## hw03 Process ##
