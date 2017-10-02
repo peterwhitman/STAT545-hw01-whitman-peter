@@ -21,15 +21,3 @@ The STAT 545 homework instructions can be found [here](http://stat545.com/syllab
 ![](https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/599459_616544582597_2059276908_n.jpg?oh=d1003c2672ba481af4109786daf2b62a&oe=5A5F0016)
 
 *Somewhere on the Kopka in Northern Ontario*
-
-
-
-## hw03 Process ##
-
-I tackled the following tasks:
-
-* Get the maximum and minimum of GDP per capita for all continents.
-* How is life expectancy changing over time on different continents?
-* Report the absolute and/or relative abundance of countries with low life expectancy over time by continent
-
-I found that the third task was the most challenging. I had trouble computing the number of countries below the mean life expectancy rate for each year by continent. I found it easy to compute the number of countries below the mean life expectancy rate for each year, but I couldn't break it down by continent. To remedy this problem I used count(benchmark, year) instead of just count(benchmark). 
