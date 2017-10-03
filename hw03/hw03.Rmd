@@ -47,7 +47,7 @@ gapminder %>%
 
 ```
 
-*The abouve table depicts the change in life expectancy rate between 1952 and 2007 for each continent*
+*The above table depicts the change in life expectancy rate between 1952 and 2007 for each continent*
 
 ```{r}
 p4 <- gapminder %>% 
