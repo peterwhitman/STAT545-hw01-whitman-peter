@@ -1,4 +1,4 @@
-# STAT545-hw01-whitman-peter
+# STAT545-whitman-peter
 
 Hello world, my name is Peter Whitman. This is a repository that I've created for STAT 545 homework. 
 

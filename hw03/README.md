@@ -7,3 +7,5 @@ I tackled the following tasks:
 * Report the absolute and/or relative abundance of countries with low life expectancy over time by continent
 
 I found that the third task was the most challenging. I had trouble computing the number of countries below the mean life expectancy rate for each year by continent. I found it easy to compute the number of countries below the mean life expectancy rate for each year, but I couldn't break it down by continent. To remedy this problem I used count(benchmark, year) instead of just count(benchmark). 
+
+The hw03.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw03/hw03.md)
