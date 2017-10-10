@@ -1,0 +1,125 @@
+---
+title: "hw04"
+author: "Peter Whitman"
+date: "10/9/2017"
+output: github_document
+---
+
+```{r}
+library(gapminder)
+library(knitr)
+library(tidyverse)
+library(reshape2)
+library(devtools)
+library(readxl)
+library(tidyr)
+```
+
+# 1. General data reshaping and relationship to aggregation
+
+#### Make a tibble with one row per year and columns for life expectancy for two or more countries.
+* Use knitr::kable() to make this table look pretty in your rendered homework.
+* Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+
+```{r}
+df.1 <- gapminder %>% filter(country == "Canada" | country == "United States" | country == "Uganda" | country == "Australia" | country == "Mongolia" | country == "Saudi Arabia") %>% select(year, country, lifeExp) %>% spread(key = country, value = lifeExp) 
+kable(df.1)
+```
+
+```{r}
+df.2 <- melt(df.1, id.vars = "year")
+kable(df.2)
+```
+
+```{r}
+graph1 <- df.2 %>% ggplot(aes(year, value, color = variable)) + geom_point() + labs(x = "Year", y = "Life Expectancy", title = "Life Expectancy Change Over Time") + scale_colour_discrete("Countries")
+graph1
+```
+
+```{r}
+graph1 + geom_smooth() 
+```
+
+# 2. Join, merge, look up
+
+#### Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a  dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
+
+```{r}
+HDI <- read_excel("HumanDevelopmentIndex.xlsx")
+glimpse(HDI)
+```
+
+
+```{r}
+viz1 <- gather(HDI, "year", "HDI", 3:28) %>% select(Country, year, HDI) %>% filter(!is.na(HDI)) %>% group_by(Country)
+viz1
+```
+
+```{r}
+viz1 %>% ggplot(aes(year, HDI, alpha = 0.5)) + geom_line(aes(group=Country)) + labs(title = "Change in Human Development Index Between 1990 and 2015 for UN countries", y= "Human Development Index (HDI)", x = "Year") + scale_x_discrete( breaks=c(1990, 1995, 2000, 2005, 2010, 2015)) + theme(legend.position="none")
+```
+
+
+```{r}
+p1 <- left_join(gapminder, HDI, by = c("country" = "Country"))
+p1
+```
+
+```{r}
+dev1 <- p1 %>% filter(year == 2007) %>% select(country, continent, lifeExp, pop, gdpPercap, `2007`) 
+dev1
+```
+
+```{r}
+dev2 <- dev1 %>% mutate(dev_threshold=c("developing2007", "developed2007")[(`2007` >= 0.800) + 1]) %>% filter(!is.na(`2007`))
+dev2
+```
+
+```{r}
+dev3 <- dev2 %>% group_by(continent) %>% count(dev_threshold)
+dev3
+```
+
+```{r}
+dev4 <- dev3 %>% spread(key = dev_threshold, value = n) 
+dev4[is.na(dev4)] <- 0
+dev4
+```
+
+```{r}
+dev5 <- melt(dev4, id.vars = "continent") 
+dev5 %>% 
+ggplot(aes(continent, fill = variable, y = value)) +
+    geom_col(position = "dodge") + labs(x="Continent", 
+          y="Number of Countries",
+          title="Number of Developed and Developing Countries by Continent in 2007") 
+```
+
+
+```{r}
+dev6 <- p1 %>% filter(year == 1992) %>% select(country, continent, lifeExp, pop, gdpPercap, `1992`)
+dev7 <- dev6 %>% mutate(dev_threshold=c("developing1992", "developed1992")[(`1992` >= 0.800) + 1]) %>% filter(!is.na(`1992`))
+dev8 <- dev7 %>% group_by(continent) %>% count(dev_threshold)
+dev9 <- dev8 %>% spread(key = dev_threshold, value = n)
+dev9[is.na(dev9)] <- 0
+dev4
+```
+
+```{r}
+dev10 <- inner_join(dev4, dev9)
+dev10
+```
+
+```{r}
+dev11 <- dev10 %>% select(continent, developed2007, developed1992)
+kable(dev11)
+```
+
+```{r}
+dev12 <- melt(dev11, id.vars = "continent") 
+dev12 %>% ggplot(aes(continent, fill = variable, y = value)) +
+    geom_col(position = "dodge") + labs(x="Continent", 
+          y="Number of Countries",
+          title="Number of Developed Countries by Continent in 1992 and 2007") + scale_color_discrete("Developed Countries")
+```
+
