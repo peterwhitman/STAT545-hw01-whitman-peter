@@ -1,6 +1,6 @@
 # Process
 
-I completed the following tasks
+I completed the following tasks:
 * Make a tibble with one row per year and columns for life expectancy for two or more countries.
     + Use knitr::kable() to make this table look pretty in your rendered homework.
     + Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
