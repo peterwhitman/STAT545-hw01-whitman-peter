@@ -15,7 +15,9 @@ library(readxl)
 library(tidyr)
 ```
 
-# 1. General data reshaping and relationship to aggregation
+
+# 1. General data reshaping and relationship to aggregation #
+
 
 #### Make a tibble with one row per year and columns for life expectancy for two or more countries.
 * Use knitr::kable() to make this table look pretty in your rendered homework.
@@ -48,7 +50,9 @@ graph1 + geom_smooth()
 
 *Here is the same figure, but outputed using geom_smooth, which helps the viewer understand the trends in the data*
 
-# 2. Join, merge, look up
+
+# 2. Join, merge, look up #
+
 
 #### Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a  dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
 
@@ -78,7 +82,7 @@ p1 <- left_join(gapminder, HDI, by = c("country" = "Country"))
 p1
 ```
 
-*Here I have joined the HDI data to the gapminder data by country*
+*Here I have joined the HDI data to the gapminder data by country using a left_join*
 
 ```{r}
 dev1 <- p1 %>% filter(year == 2007) %>% select(country, continent, lifeExp, pop, gdpPercap, `2007`) 
