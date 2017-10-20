@@ -1,0 +1,7 @@
+structure(list(artist_name = c("Weezer", "Toby Keith", "The Smashing Pumpkins", 
+"Faith Hill", "Third Day", "The Temptations", "Kenny Rogers", 
+"Mary J. Blige", "Rage Against The Machine", "Supergrass"), hotness = c(0.776167742324, 
+0.688381697457, 0.674834271477, 0.670106172837, 0.642042372557, 
+0.633353702739, 0.625428356113, 0.614140285235, 0.589086799818, 
+0.585861386118)), .Names = c("artist_name", "hotness"), row.names = c(NA, 
+-10L), class = c("tbl_df", "tbl", "data.frame"))
