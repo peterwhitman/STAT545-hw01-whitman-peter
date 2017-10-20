@@ -12,6 +12,8 @@ hw03.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-pete
 
 hw04.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md)
 
+hw05.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md)
+
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
 * Hometown: I was born and raised in St. Paul, MN
