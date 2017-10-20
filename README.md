@@ -4,7 +4,7 @@ Hello world, my name is Peter Whitman. This is a repository that I've created fo
 
 The STAT 545 homework instructions can be found [here](http://stat545.com/syllabus.html)
 
-* HW01: Edit README.md and Use R Markdown can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md)
+* [HW01]: Edit README.md and Use R Markdown can be found (https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md)
 
 * HW02: Explore Gapminder and use dplyr can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw02/hw02.md)
 
