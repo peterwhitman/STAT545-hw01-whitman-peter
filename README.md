@@ -4,15 +4,15 @@ Hello world, my name is Peter Whitman. This is a repository that I've created fo
 
 The STAT 545 homework instructions can be found [here](http://stat545.com/syllabus.html)
 
-* [HW01](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md): Edit README.md and Use R Markdown can be found
+* [HW01](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md): Edit README.md and Use R Markdown
 
-* [HW02](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw02/hw02.md): Explore Gapminder and use dplyr can be found
+* [HW02](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw02/hw02.md): Explore Gapminder and use dplyr
 
-* [HW03](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw03/hw03.md): Manipulate and explore data with dplyr and ggplot 2 can be found
+* [HW03](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw03/hw03.md): Manipulate and explore data with dplyr and ggplot 2
 
-* [HW04](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md): Tidy data and joins can be found
+* [HW04](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md): Tidy data and joins
 
-* [HW05](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/hw05.md): Factor and figure management can be found
+* [HW05](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/hw05.md): Factor and figure management
 
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
