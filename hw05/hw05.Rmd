@@ -65,6 +65,7 @@ dim(release_drop)
 nlevels(release_drop$release)
 ```
 
+*100 records were filtered out from the dataset, which corresponded to a reduction of 93 levels*
 
 * Reorder levels based on knowledge from data.
 
@@ -88,6 +89,8 @@ arrange2 <- release_drop %>%
 arrange2
 ```
 
+*The data is reordered by artist familiarity*
+
 ```{r}
 arrange3 <- release_drop %>% 
   arrange(artist_familiarity) %>%
@@ -95,6 +98,8 @@ arrange3 <- release_drop %>%
   ggplot(aes(fct_reorder(release, artist_familiarity, max,desc = FALSE), artist_familiarity)) + geom_col() + scale_x_discrete("release") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(title = "Album Releases in Minneapolis by Artist Familiarity (1995 - Present)", y = "Artist Familiarity", x = "Album Title")
 arrange3
 ```
+
+*No change after arrange is used in tandem with fct_reorder*
 
 ## File I/O
 
@@ -143,6 +148,8 @@ viz2 <- singer_locations %>%
 viz2 
 ```
 
+*A look at artist hotness vs artist familiarity. I used the Mason Dixon line (which divides the north from south in USA [latitude = 39.43]) as the point of divergence. I usually associated the north with a liberal agenda and the south with a conservative agenda, which informed my use of color ramp*
+
 ```{r}
 singer_locations %>%
   filter(latitude > 25 & latitude <= 49 & longitude < -50 & longitude > -150) %>%
@@ -158,6 +165,8 @@ singer_locations %>%
   geom_point()
 ```
 
+*An attempt at looking at the distribution of artist hotness in North America*
+
 ```{r}
 map <- get_googlemap(center = c(long = -97, lat = 39.8283), zoom = 4, size = c(640,640), scale = 2)
 ggmap(map, fullpage = TRUE) + 
@@ -167,6 +176,7 @@ ggmap(map, fullpage = TRUE) +
   scale_colour_distiller(palette="Oranges", "Artist Hotness", direction = 1)
 ```
 
+*Artist hotness ploted on a map of North America. I also tried using an intuitive color ramp.*
 
 ```{r}
 mapWorld <- borders("world", colour="gray50", fill="gray50")
@@ -179,6 +189,8 @@ mp <- ggplot() +
 mp 
 ```
 
+*World map of artist locations. I like the contrast between pink and grey*
+
 ```{r}
 a <- singer_locations %>%
   filter(!is.na(latitude)) %>%
@@ -186,6 +198,8 @@ a <- singer_locations %>%
   ggplot(aes(longitude, latitude)) + stat_density_2d(aes(fill = ..level..), geom = "polygon") + geom_point() + coord_map() 
 a
 ```
+
+*Here's an attempt to look at artist density within the USA. You can sort of see the shape of the USA represented by the points, but clearly a map would help with vizualization*
 
 ```{r}
 usa <- map_data("usa")
@@ -202,6 +216,8 @@ densitymap <- ggplot(data = usa) +
 densitymap
 ```
 
+*Density map of artists within the USA*
+
 ## Writing Figures to Files
 
 
@@ -210,4 +226,7 @@ ggsave("USA_ArtistDensity.pdf", width=15, height=10, units="cm", plot = densitym
 ggsave("ArtistDistribution.png", width=15, height=10, units="cm", plot = mp)
 ```
 
-## Clean up your repo!
+USA_ArtistDensity can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/USA_ArtistDensity.pdf)
+
+ArtistDistribution can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/ArtistDistribution.png)
+
