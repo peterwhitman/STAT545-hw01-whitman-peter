@@ -12,7 +12,9 @@ hw03.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-pete
 
 hw04.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md)
 
-hw05.md can be found [here]()
+hw05.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/hw05.md)
+
+hw06.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw06/hw06.md)
 
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
