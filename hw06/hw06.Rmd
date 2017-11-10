@@ -1,0 +1,254 @@
+---
+title: "Homework 06 - Data Wrangling Wrap Up"
+author: "Peter Whitman"
+date: "11/3/2017"
+output: github_document
+---
+
+```{r}
+library(gapminder)
+library(readr)
+library(singer)
+library(knitr)
+library(tidyverse)
+library(reshape2)
+library(devtools)
+library(readxl)
+library(tidyr)
+library(forcats)
+library(ggmap)
+library(RColorBrewer)
+library(repurrrsive)
+library(listviewer)
+library(jsonlite)
+library(dplyr)
+library(tibble)
+library(purrr)
+data("singer_locations")
+```
+
+
+#  Writing functions
+
+*I would like to create a function that returns the top ten hottest artist in the year that you were born. First, I need to know that range of years present in the dataset so I can prompt the user in the right direction if they have inputed a year outside of the range.*
+
+```{r}
+max(singer_locations$year)
+min(singer_locations$year)
+```
+
+*When analyzing the singer_locations dataset, this function will except a year as the argument and output the top ten hottest artists in that year. I've included two if statements to get the user back on track if they try to input an argument that is outside of the scope of the function.*
+
+```{r}
+top10 <- function(x) 
+{
+  if(!is.numeric(x))
+  {
+    stop('I am so sorry, but this function only works for numeric input!\n',
+         'You have provided an object of class: ', class(x)[1])
+  }
+  if(x > 2010 | x < 1950)
+  {
+    stop('You must enter a year between 1950 and 2010', default = NULL)
+  }
+  artists <- singer_locations %>%
+  filter(year == x) %>%
+  group_by(artist_name) %>%
+  select(release, artist_name, artist_hotttnesss) %>%
+  summarize(hotness = mean(artist_hotttnesss)) %>%
+  arrange(desc(hotness)) %>%
+  head(10)
+  return(artists)
+}
+top10(1995)
+```
+
+*I wanted to expand the scope of the top10 function, so that the output includes the top 25 hottest artist for any given year as well as other information like longitude, latitude, city etc. Ultimately, I will be using this function in my exploration of ggmap later on.*
+
+```{r}
+top25 <- function(x) 
+{
+  if(!is.numeric(x))
+  {
+    stop('I am so sorry, but this function only works for numeric input!\n',
+         'You have provided an object of class: ', class(x)[1])
+  }
+  if(x > 2010 | x < 1950)
+  {
+    stop('You must enter a year between 1900 and 2010', default = NULL)
+  }
+  artists <- singer_locations %>%
+  filter(year == x) %>%
+  group_by(artist_name) %>%
+  select(release, artist_name, artist_hotttnesss, latitude, longitude, city) %>%
+  mutate(hotness = mean(artist_hotttnesss)) %>%
+  arrange(desc(hotness)) %>%
+  head(25)
+  return(artists)
+}
+top25(1995)
+```
+
+*I know the homework prompt asked for functions that go beyond simple dplyr verbs. So, I've created a function that excepts a dataframe, and two variables as arguments. The output is a summary of a linear regression for the two specified variables and the corresponding plot. I spent a little time trying to figure out how to develop plot and axis titles that changed with the arguments*
+
+```{r}
+easylm <- function(data, x, y) 
+{
+      avectorx <- data[ , x]
+      avectory <- data[ , y]
+      formula <- paste(x, y, sep = "~")
+      result <- lm(formula, data)
+      summary <- summary(result)
+      chart_title <- substitute(paste("A Linear Regression of ", x," vs.", y, ", Data: ", data))
+      plot <- ggplot(data = data, aes(x = avectorx, y = avectory)) + geom_point() + geom_smooth(method = "lm", se = FALSE) + ggtitle(chart_title) + labs(x = x, y = y)
+      return(list(summary, plot))
+}
+easylm(data = gapminder, x = "gdpPercap", y = "lifeExp")
+```
+
+*Below, I've tested the easylm() function on the singer_locations dataset*
+
+```{r}
+easylm(data = singer_locations, x = "artist_hotttnesss", y = "artist_familiarity")
+```
+
+*One last function (for now). I've created a simple correlation function which compares all of the numeric variables in a dataset*
+
+```{r}
+correlation <- function(data) 
+{
+  cor(data[,unlist(lapply(data, is.numeric))])    
+}
+correlation(gapminder)
+```
+
+```{r}
+correlation(singer_locations)
+```
+
+
+# Work with the candy data
+
+*Below I've examined how joy/despair scores change with age. First I had to download the dataset from github, and read the resulting .csv into a dataframe. I then worked on trying to find the sum of joy and despair responses for each row using rowSums(). Finally, I grouped the results by age, summarized the counts of joy and despair, and melted the dataframe for plotting purposes.*
+
+```{r}
+candy <- read.csv("candydata.csv", stringsAsFactors = FALSE)
+candy_id <- candy %>%
+  select(age = starts_with("How"), everything()) 
+sums <- candy_id %>%
+  mutate(joysum = rowSums(candy_id=="JOY"), despairsum = rowSums(candy_id=="DESPAIR")) 
+total <- sums %>%
+  select(age, despairsum, joysum) %>%
+  group_by(age) %>%
+  summarize(sum(despairsum), sum(joysum)) %>%
+  filter(age != 44.4444)
+total
+total2 <- melt(total, id.vars = "age")
+total2
+total2 %>% ggplot(aes(age, value, color = variable)) + geom_line() + scale_color_discrete(name = "Response", labels = c("Despair", "Joy")) + labs(title = "Response to Holloween Treats by Age", x = "Age", y = "Responses")
+```
+
+*Its quite clear that far more middle-aged individuals responded to the survey than children or senior citizens, so to get a better idea of how each age responds to holloween treats, I found the mean number of joy and despair responses per age and plotted the result.*
+
+```{r}
+mean <- sums %>%
+  select(age, despairsum, joysum) %>%
+  group_by(age) %>%
+  summarize(mean(despairsum), mean(joysum)) %>%
+  filter(age != 44.4444) 
+mean2 <- melt(mean, id.vars = "age")
+mean2
+mean2 %>% ggplot(aes(age, value, color = variable)) + geom_point() + geom_smooth() + scale_color_discrete(name = "Response", labels = c("Despair", "Joy")) + labs(title = "Average Response to Holloween Treats by Age", x = "Age", y = "Average Response")
+```
+
+*You would think that as people get older they would get less picky about holloween treats, but apperently, accordring to the plot above, this is not the case. *
+
+# Work with the singer data
+
+*ggmap isn't the only way to map data, so I tried out a different approach first and then used ggmap later on. For both approaches, I made a function that excepts a year as the argument. It then produces a table and map with the locations of the top 25 hottest artists in that year. I wanted to provide the table because it allows users to see that many artists do not have lat/long coordinates. Similar to the easylm function, I created a title that changes with the inputed argument*
+
+```{r}
+Top25MapArtist <- function(x)
+{
+if(!is.numeric(x))
+  {
+    stop('I am so sorry, but this function only works for numeric input!\n',
+         'You have provided an object of class: ', class(x)[1])
+  }
+  if(x > 2010 | x < 1950)
+  {
+    stop('You must enter a year between 1950 and 2010', default = NULL)
+  }
+  
+world <- map_data("world")
+AOI <- top25(x)
+POI <- AOI %>% 
+  filter(!is.na(latitude))
+print(POI)
+
+worldmap_title <- substitute(paste("Known Locations of the Top 10 Hottest Artsit in ", x))
+  
+ggplot(data = world) + 
+  geom_polygon(aes(x = long, y = lat, group = group, color = "dark grey"), color = "dark grey") +   coord_fixed(1.3) +
+  guides(fill=FALSE) +
+  geom_point(data = POI, aes(longitude, latitude), color = "Deep Pink", fill="Pink",pch=21, size=2, alpha=I(0.7)) + ggtitle(worldmap_title) + labs(x="Longitude", y="Latitude") 
+}
+Top25MapArtist(2001)
+```
+
+```{r}
+Top25MapArtist(1975)
+```
+
+*I created another function that uses ggmap. This function takes a year as an argument and produces a map with the top 10 hottest artist within North America for that year. I had to filter lat/long coordinates based on the extent of the USA (notice this isn't perfect -- there is a Toronto entry). I also had to employ a join, because the top 10 filter excluded the lat/long coordinates. Notice in both tables there are instances of repeat entries. I'm not sure why that is*
+
+```{r}
+NAmericaTop10 <- function(x)
+{
+  if(!is.numeric(x))
+  {
+    stop('I am so sorry, but this function only works for numeric input!\n',
+         'You have provided an object of class: ', class(x)[1])
+  }
+  if(x > 2010 | x < 1950)
+  {
+    stop('You must enter a year between 1950 and 2010', default = NULL)
+  }
+  
+  artists1 <- singer_locations %>%
+  filter(year == x) %>%
+  filter(latitude > 25 & latitude <= 49 & longitude < -50 & longitude > -150) %>%
+  group_by(artist_name) %>%
+  select(release, artist_name, artist_hotttnesss, latitude, longitude, city)
+  
+  artists2 <- singer_locations %>%
+  filter(year == x) %>%
+  filter(latitude > 25 & latitude <= 49 & longitude < -50 & longitude > -150) %>%
+  group_by(artist_name) %>%
+  select(release, artist_name, artist_hotttnesss, latitude, longitude, city) %>%
+  summarize(hotness = mean(artist_hotttnesss)) %>%
+  arrange(desc(hotness)) %>%
+  head(10)
+  
+  first_line <- paste("Know Locations of the Top Ten Hottest Artists in")
+  second_line <- paste("USA in ", x)
+  
+  artists3 <- semi_join(artists1, artists2, by = "artist_name")
+  map2 <- get_googlemap(center = c(long = -97, lat = 39.8283), zoom = 4, size = c(640,640), scale = 2)
+  ggmap <- ggmap(map2, fullpage = TRUE) + 
+  geom_point(data=artists3, aes(longitude, latitude)) + ggtitle(paste0(first_line,"\n",second_line)) 
+  return(list(artists3, ggmap))
+}
+NAmericaTop10(2010)
+```
+
+*Here are two tests of the function*
+
+```{r}
+NAmericaTop10(2000)
+```
+
+```{r}
+NAmericaTop10(1000)
+```
+

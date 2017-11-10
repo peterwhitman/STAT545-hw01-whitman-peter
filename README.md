@@ -4,15 +4,15 @@ Hello world, my name is Peter Whitman. This is a repository that I've created fo
 
 The STAT 545 homework instructions can be found [here](http://stat545.com/syllabus.html)
 
-* [HW01](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md): Edit README.md and Use R Markdown
+hw01.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw01/hw01_gapminder.md)
 
-* [HW02](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw02/hw02.md): Explore Gapminder and use dplyr
+hw02.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw02/hw02.md)
 
-* [HW03](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw03/hw03.md): Manipulate and explore data with dplyr and ggplot 2
+hw03.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw03/hw03.md)
 
-* [HW04](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md): Tidy data and joins
+hw04.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw04/hw04.md)
 
-* [HW05](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw05/hw05.md): Factor and figure management
+hw05.md can be found [here]()
 
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
