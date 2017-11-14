@@ -25,9 +25,9 @@ Exploratory Analysis
 
 *Below, I've created some descriptive plots. You can view the source files for the boxplot [here]() and the change over time plot [here]().*
 
-![A boxplot of life expectancy for each continent, with outliers in pink.](figures/LifeExp_BoxPlot.png)
+![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
 
-![A plot of the changes in life expectancy over time by continent](figures/LifeExp_OverTime.png)
+![](figures/LifeExp_OverTime.png) *plot. 2 the changes in life expectancy over time by continent*
 
 *The reordered gapminder data can be found [here](). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R]() script.*
 
@@ -347,3 +347,13 @@ kable(TopBottom_lm)
 | Europe      |   46.02232| Turkey      |
 | Oceania     |   68.68692| New Zealand |
 | Oceania     |   68.40051| Australia   |
+
+Generate Figures
+================
+
+*I created .pdf doucment with scatterplots of life expectancy vs. year, faceting on country, and fitted line overlaid. This is a large docoment, so I have not embedded it here. Please click [here]() to see the document*
+
+Automate the pipeline
+=====================
+
+*This entire assignment was automated using remake instead of make. The YAML file, which was used to automate my pipeline can be found [here]()*
