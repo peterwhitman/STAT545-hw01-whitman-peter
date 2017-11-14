@@ -1,0 +1,51 @@
+---
+title: "Homework 07"
+author: "Peter Whitman"
+date: "11/14/2017"
+output: github_document
+---
+
+```{r}
+library(tidyr)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(ggforce)
+library(ggplus)
+library(knitr)
+```
+
+# Download the data
+
+*To download the data I created a function -- download_data() -- that can download data from a url. Please refer to the [exploratory.R]() script in the R folder for the function.*
+
+# Exploratory Analysis
+
+*To read the data, I created a second function -- read() -- whichs reads the downloaded .csv file into a dataframe.*
+
+*Below, I've created some descriptive plots. You can view the source files for the boxplot [here]() and the change over time plot [here]().*
+
+
+![A boxplot of life expectancy for each continent, with outliers in pink.](figures/LifeExp_BoxPlot.png)
+
+
+![A plot of the changes in life expectancy over time by continent](figures/LifeExp_OverTime.png)
+
+*The reordered gapminder data can be found [here](). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R]() script.*
+
+# Statistical Analysis
+
+*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R]() script and the source file for this table can be found (here)[]. The below table is the ouput of this function.*
+
+```{r}
+Table_lm <- read.csv("data/Table_lm.csv")
+kable(Table_lm)
+```
+
+*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R]() script and the source file for this table can be found [here]()
+
+```{r}
+TopBottom_lm <- read.csv("data/TopBottom_lm.csv")
+kable(TopBottom_lm)
+```
+

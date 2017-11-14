@@ -1,0 +1,103 @@
+packages:
+  - dplyr
+  - ggplot2
+  - rmarkdown
+  - readr
+  - singer
+  - knitr
+  - tidyverse
+  - reshape2
+  - devtools
+  - readxl
+  - tidyr
+  - forcats
+  - ggmap
+  - RColorBrewer
+  - repurrrsive
+  - jsonlite
+  - dplyr
+  - tibble
+  - purrr
+  - downloader
+  - R6
+  - yaml
+  - digest
+  - crayon
+  - optparse
+  - storr
+  - gridExtra
+  - broom
+  - ggplus
+  - ggforce
+  - DiagrammeR
+
+sources:
+  - R
+
+targets:
+  all:
+    depends:
+      - data
+      - figures
+      - hw07.md
+      
+  data:
+    depends:
+      - data/gapminder.csv
+      - data/ReorderContinents_MeanLifeExp.csv
+      - data/Table_lm.csv
+      - data/TopBottom_lm.csv
+      
+  figures:
+    depends:
+      - figures/LifeExp_BoxPlot.png
+      - figures/LifeExp_OverTime.png
+      - figures/Plot_lm.pdf
+      
+  data/gapmider.csv:
+    command: download_data(target_name)
+  
+  project_data:
+    command: read("data/gapminder.csv")
+    
+  figures/LifeExp_BoxPlot.png:
+    command: lifeExp_scatter(project_data)
+    plot: true
+    
+  figures/LifeExp_OverTime.png:
+    command: lifeExp_time(project_data)
+    plot: true
+    
+  ReorderContinents_MeanLifeExp:
+    command: reorder_continents_lifeExp(project_data)
+    
+  data/ReorderContinents_MeanLifeExp.csv:
+    command: write.csv(ReorderContinents_MeanLifeExp, target_name, row.names=FALSE)
+    
+  sorted_data:
+    command: read("data/ReorderContinents_MeanLifeExp.csv")
+    
+  Table_lm:
+    command: tabulatelm(sorted_data)
+    
+  data/Table_lm.csv:
+    command: write.csv(Table_lm, target_name, row.names=FALSE)
+    
+  TopBottom_lm:
+    command: TopBottom_Intercept(Table_lm)
+    
+  data/TopBottom_lm.csv:
+    command: write.csv(TopBottom_lm, target_name, row.names=FALSE)
+    
+  figures/Plot_lm.pdf:
+    command: Plotlm(sorted_data)
+    plot: true
+    
+  hw07.md:
+    depends:
+      - figures/LifeExp_BoxPlot.png
+      - figures/LifeExp_OverTime.png
+      - figures/Plot_lm.pdf
+      - data/Table_lm.csv
+      - data/TopBottom_lm.csv
+    command: render("hw07report.Rmd")
