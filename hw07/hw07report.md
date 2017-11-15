@@ -23,7 +23,7 @@ Exploratory Analysis
 
 *To read the data, I created a second function -- read() -- whichs reads the downloaded .csv file into a dataframe.*
 
-*Below, I've created some descriptive plots. You can view the source files for the boxplot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_BoxPlot.png) and the change over time plot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_OverTime.png).*
+*Below, I've created some descriptive plots. You can view the source files for the boxplot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_BoxPlot.png) and the change over time plot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_OverTime.png). You can view the functions that I developed to create the plots in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script*
 
 ![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
 
