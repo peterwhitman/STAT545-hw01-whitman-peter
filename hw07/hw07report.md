@@ -25,9 +25,11 @@ Exploratory Analysis
 
 *Below, I've created some descriptive plots. You can view the source files for the boxplot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_BoxPlot.png) and the change over time plot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_OverTime.png). You can view the functions that I developed to create the plots in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script*
 
-![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
+![*plot 1. life expectancy for each continent, with outliers in pink*](figures/LifeExp_BoxPlot.png) 
 
-![](figures/LifeExp_OverTime.png) *plot. 2 the changes in life expectancy over time by continent*
+
+
+![*plot. 2 the changes in life expectancy over time by continent*](figures/LifeExp_OverTime.png) 
 
 *The reordered gapminder data can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/ReorderContinents_MeanLifeExp.csv). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script.*
 
