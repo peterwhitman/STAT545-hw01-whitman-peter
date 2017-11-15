@@ -16,25 +16,25 @@ library(knitr)
 Download the data
 =================
 
-*To download the data I created a function -- download\_data() -- that can download data from a url. Please refer to the [exploratory.R]() script in the R folder for the function.*
+*To download the data I created a function -- download\_data() -- that can download data from a url. Please refer to the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script in the R folder for the function.*
 
 Exploratory Analysis
 ====================
 
 *To read the data, I created a second function -- read() -- whichs reads the downloaded .csv file into a dataframe.*
 
-*Below, I've created some descriptive plots. You can view the source files for the boxplot [here]() and the change over time plot [here]().*
+*Below, I've created some descriptive plots. You can view the source files for the boxplot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_BoxPlot.png) and the change over time plot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_OverTime.png).*
 
 ![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
 
 ![](figures/LifeExp_OverTime.png) *plot. 2 the changes in life expectancy over time by continent*
 
-*The reordered gapminder data can be found [here](). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R]() script.*
+*The reordered gapminder data can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/ReorderContinents_MeanLifeExp.csv). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script.*
 
 Statistical Analysis
 ====================
 
-*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R]() script and the source file for this table can be found (here)\[\]. The below table is the ouput of this function.*
+*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found (here)[https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv]. The below table is the ouput of this function.*
 
 ``` r
 Table_lm <- read.csv("data/Table_lm.csv")
@@ -328,7 +328,7 @@ kable(Table_lm)
 | Zimbabwe                 | Africa    | (Intercept)    |  55.2212436|  3.9127001|   14.1133340|  0.0000001|
 | Zimbabwe                 | Africa    | I(year - 1952) |  -0.0930210|  0.1205097|   -0.7718963|  0.4580290|
 
-\*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R]() script and the source file for this table can be found [here]()
+\*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv)
 
 ``` r
 TopBottom_lm <- read.csv("data/TopBottom_lm.csv")
@@ -351,9 +351,9 @@ kable(TopBottom_lm)
 Generate Figures
 ================
 
-*I created .pdf doucment with scatterplots of life expectancy vs. year, faceting on country, and fitted line overlaid. This is a large docoment, so I have not embedded it here. Please click [here]() to see the document*
+*I created .pdf doucment with scatterplots of life expectancy vs. year, faceting on country, and fitted line overlaid. This is a large docoment, so I have not embedded it here. Please click [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/Plot_lm.pdf) to see the document. The function that I used developed to create this file can be found in the [figures.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/figures.R) script*
 
 Automate the pipeline
 =====================
 
-*This entire assignment was automated using remake instead of make. The YAML file, which was used to automate my pipeline can be found [here]()*
+*This entire assignment was automated using remake instead of make. The YAML file, which was used to automate my pipeline can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/remake.yml)*
