@@ -38,7 +38,7 @@ Exploratory Analysis
 Statistical Analysis
 ====================
 
-*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found (here)[https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv]. The below table is the ouput of this function.*
+*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv). The below table is the ouput of this function.*
 
 ``` r
 Table_lm <- read.csv("data/Table_lm.csv")
