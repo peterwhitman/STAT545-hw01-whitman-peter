@@ -332,7 +332,7 @@ kable(Table_lm)
 | Zimbabwe                 | Africa    | (Intercept)    |  55.2212436|  3.9127001|   14.1133340|  0.0000001|
 | Zimbabwe                 | Africa    | I(year - 1952) |  -0.0930210|  0.1205097|   -0.7718963|  0.4580290|
 
-\*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv)*
+*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv)*
 
 ``` r
 TopBottom_lm <- read.csv("data/TopBottom_lm.csv")
