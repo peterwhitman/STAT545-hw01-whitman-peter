@@ -25,9 +25,13 @@ Exploratory Analysis
 
 *Below, I've created some descriptive plots. You can view the source files for the boxplot [here]() and the change over time plot [here]().*
 
-![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
+![](figures/LifeExp_BoxPlot.png) 
 
-![](figures/LifeExp_OverTime.png) *plot. 2 the changes in life expectancy over time by continent*
+*plot 1. life expectancy for each continent, with outliers in pink*
+
+![](figures/LifeExp_OverTime.png) 
+
+*plot. 2 the changes in life expectancy over time by continent*
 
 *The reordered gapminder data can be found [here](). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R]() script.*
 
@@ -328,7 +332,7 @@ kable(Table_lm)
 | Zimbabwe                 | Africa    | (Intercept)    |  55.2212436|  3.9127001|   14.1133340|  0.0000001|
 | Zimbabwe                 | Africa    | I(year - 1952) |  -0.0930210|  0.1205097|   -0.7718963|  0.4580290|
 
-\*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R]() script and the source file for this table can be found [here]()
+\*I found the countries within each continent with the highest and lowest slope. I thought this was a good indicator of the degree of change in life expectancy for each country. The function that I used to create this table can be found in the [statistical.R]() script and the source file for this table can be found [here]()
 
 ``` r
 TopBottom_lm <- read.csv("data/TopBottom_lm.csv")
