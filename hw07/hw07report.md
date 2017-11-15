@@ -16,29 +16,25 @@ library(knitr)
 Download the data
 =================
 
-*To download the data I created a function -- download\_data() -- that can download data from a url. Please refer to the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script in the R folder for the function.*
+*To download the data I created a function -- download\_data() -- that can download data from a url. Please refer to the [exploratory.R]() script in the R folder for the function.*
 
 Exploratory Analysis
 ====================
 
 *To read the data, I created a second function -- read() -- whichs reads the downloaded .csv file into a dataframe.*
 
-*Below, I've created some descriptive plots. You can view the source files for the boxplot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_BoxPlot.png) and the change over time plot [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/LifeExp_OverTime.png). You can view the functions that I developed to create the plots in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script*
+*Below, I've created some descriptive plots. You can view the source files for the boxplot [here]() and the change over time plot [here]().*
 
-![](figures/LifeExp_BoxPlot.png) 
+![](figures/LifeExp_BoxPlot.png) *plot 1. life expectancy for each continent, with outliers in pink*
 
-*plot 1. life expectancy for each continent, with outliers in pink*
+![](figures/LifeExp_OverTime.png) *plot. 2 the changes in life expectancy over time by continent*
 
-![](figures/LifeExp_OverTime.png) 
-
-*plot. 2 the changes in life expectancy over time by continent*
-
-*The reordered gapminder data can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/ReorderContinents_MeanLifeExp.csv). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/exploratory.R) script.*
+*The reordered gapminder data can be found [here](). The function that I used to read, plot, and reorder the data can be found in the [exploratory.R]() script.*
 
 Statistical Analysis
 ====================
 
-*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv). The below table is the ouput of this function.*
+*I fit a linear regression of life expectancy on year within each country. The function that I used to complete this task can be found in the [statistical.R]() script and the source file for this table can be found (here)\[\]. The below table is the ouput of this function.*
 
 ``` r
 Table_lm <- read.csv("data/Table_lm.csv")
@@ -332,32 +328,32 @@ kable(Table_lm)
 | Zimbabwe                 | Africa    | (Intercept)    |  55.2212436|  3.9127001|   14.1133340|  0.0000001|
 | Zimbabwe                 | Africa    | I(year - 1952) |  -0.0930210|  0.1205097|   -0.7718963|  0.4580290|
 
-*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/statistical.R) script and the source file for this table can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/data/Table_lm.csv)*
+\*I found the countries within each continent with the highest and lowest intercepts. The function that I used to create this table can be found in the [statistical.R]() script and the source file for this table can be found [here]()
 
 ``` r
 TopBottom_lm <- read.csv("data/TopBottom_lm.csv")
 kable(TopBottom_lm)
 ```
 
-| continent.x |  Intercept| country     |
-|:------------|----------:|:------------|
-| Africa      |   55.37077| Mauritius   |
-| Africa      |   28.40037| Gambia      |
-| Americas    |   68.88385| Canada      |
-| Americas    |   38.75645| Bolivia     |
-| Asia        |   66.30041| Israel      |
-| Asia        |   29.90729| Afghanistan |
-| Europe      |   72.21462| Norway      |
-| Europe      |   46.02232| Turkey      |
-| Oceania     |   68.68692| New Zealand |
-| Oceania     |   68.40051| Australia   |
+| continent.x |       Slope| country     |
+|:------------|-----------:|:------------|
+| Africa      |   0.6255357| Libya       |
+| Africa      |  -0.0930210| Zimbabwe    |
+| Americas    |   0.5565196| Nicaragua   |
+| Americas    |   0.1573545| Paraguay    |
+| Asia        |   0.7721790| Oman        |
+| Asia        |   0.2352105| Iraq        |
+| Europe      |   0.4972399| Turkey      |
+| Europe      |   0.1213301| Denmark     |
+| Oceania     |   0.2277238| Australia   |
+| Oceania     |   0.1928210| New Zealand |
 
 Generate Figures
 ================
 
-*I created .pdf doucment with scatterplots of life expectancy vs. year, faceting on country, and fitted line overlaid. This is a large docoment, so I have not embedded it here. Please click [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/figures/Plot_lm.pdf) to see the document. The function that I used developed to create this file can be found in the [figures.R](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/R/figures.R) script*
+*I created .pdf doucment with scatterplots of life expectancy vs. year, faceting on country, and fitted line overlaid. This is a large docoment, so I have not embedded it here. Please click [here]() to see the document*
 
 Automate the pipeline
 =====================
 
-*This entire assignment was automated using remake instead of make. The YAML file, which was used to automate my pipeline can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/remake.yml)*
+*This entire assignment was automated using remake instead of make. The YAML file, which was used to automate my pipeline can be found [here]()*
