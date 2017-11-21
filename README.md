@@ -18,6 +18,8 @@ hw06.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-pete
 
 hw07.md can be found [here](https://github.com/peterwhitman/STAT545-whitman-peter/blob/master/hw07/hw07report.md)
 
+hw08 shiny app can be found [here](https://peterwhitman.shinyapps.io/hw08_App/)
+
 ## Introduction ##
 * Degree program: I am a first year MSc student in geography
 * Hometown: I was born and raised in St. Paul, MN
