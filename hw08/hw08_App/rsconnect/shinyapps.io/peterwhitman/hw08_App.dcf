@@ -1,0 +1,12 @@
+name: hw08_App
+title: hw08_App
+username:
+account: peterwhitman
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 237894
+bundleId: 1089011
+url: https://peterwhitman.shinyapps.io/hw08_App/
+when: 1511302647.62035
+asMultiple: FALSE
+asStatic: FALSE
