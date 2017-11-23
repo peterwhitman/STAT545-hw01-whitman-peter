@@ -34,25 +34,25 @@ server <- function(input, output)
     {
       #Round gdpPercap and lifeExp and convert both variables to integer
       filter_gap <- gapminder_data %>% 
-        mutate(lifeExp = as.integer(round(lifeExp, 0))) %>%
-        mutate(gdpPercap = as.integer(round(gdpPercap, 0))) 
+        mutate(lifeExp = as.integer(lifeExp)) %>%
+        mutate(gdpPercap = as.integer(gdpPercap)) 
       
-      #input selected yearIn value as intial input to avoid crashing
+      #Input selected yearIn value as intial input to avoid crashing
       if(!is.null(input$yearIn)){
       filter_gap <- filter_gap %>%
         filter(year == input$yearIn) # 
       }
-      #join filtered gapminder.csv to the countries.shp file
+      #Join filtered gapminder.csv to the countries.shp file
       filtered_countries <- suppressWarnings(left_join(countries@data, filter_gap, by=c("NAME"="country")))
       return(filtered_countries)
     })
   
-  #output basemap
+  #Output basemap
   output$map <- renderLeaflet(
     {
       leaflet() %>% addProviderTiles("Esri.WorldShadedRelief",
                options = tileOptions(minZoom=1, maxZoom=15)) %>%
-        setView(lng = 0, lat = 0, zoom = 1)
+        setView(lng = 0, lat = 15, zoom = 2)
     })
   
   #observe changes in the radio buttions, redraw map accordingly
@@ -69,7 +69,7 @@ server <- function(input, output)
         #pop up that provides country name and variable
         popup_GDP <- paste0("Country: ",             
                             dataSet$NAME,         
-                            "<br>GDP/capita: ", 
+                            "<br>GDP/capita: $", 
                             dataSet$gdpPercap) 
         
         #clears previous map and redraws with gdp values for each country
@@ -124,6 +124,74 @@ server <- function(input, output)
       }
     })
   
+  observeEvent(input$yearIn, 
+               {
+                 
+                 dataSet_year <- filtered_gapminder()
+                 
+                 if(input$typeIn == "gdpPercap")
+                 {
+                   #pallete with bins
+                   pal_GDP <- colorBin("Greens", domain = dataSet_year$gdpPercap, bins = c(0, 1000, 10000, 25000, 50000, 75000, 100000, 125000))
+                   
+                   #pop up that provides country name and variable
+                   popup_GDP <- paste0("Country: ",             
+                                       dataSet_year$NAME,         
+                                       "<br>GDP/capita: $", 
+                                       dataSet_year$gdpPercap) 
+                   
+                   #clears previous map and redraws with gdp values for each country
+                   leafletProxy("map", data = dataSet_year) %>%
+                     clearShapes() %>%
+                     addPolygons(data = countries,
+                                 fillColor = ~pal_GDP(dataSet_year$gdpPercap),
+                                 fillOpacity = 0.8,
+                                 color = "darkgrey",
+                                 weight = 1.5,
+                                 popup = popup_GDP)
+                 }
+                 
+                 #same as abouve but for lifeExp
+                 else if(input$typeIn == "lifeExp")
+                 {
+                   pal_lifeExp <- colorBin("Purples", domain = dataSet_year$lifeExp, bins = c(25, 35, 45, 55, 65, 75, 85))
+                   
+                   popup_lifeExp <- paste0("Country: ",             
+                                           dataSet_year$NAME,
+                                           "<br>Life Expectancy: ", 
+                                           dataSet_year$lifeExp) 
+                   
+                   leafletProxy("map", data = dataSet_year) %>%
+                     clearShapes() %>%
+                     addPolygons(data = countries,
+                                 fillColor = ~pal_lifeExp(dataSet_year$lifeExp),
+                                 fillOpacity = .8,
+                                 color = "darkgrey",
+                                 weight = 1.5,
+                                 popup = popup_lifeExp)
+                 }
+                 
+                 #same as above but for pop
+                 else if(input$typeIn == "pop")
+                 {
+                   pal_pop <- colorBin("Oranges", domain = dataSet_year$pop, bins = c(0, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000, 1500000000))
+                   
+                   popup_pop <- paste0("Country: ",             
+                                       dataSet_year$NAME,         
+                                       "<br>Population: ", 
+                                       dataSet_year$pop) 
+                   
+                   leafletProxy("map", data = dataSet_year) %>%
+                     clearShapes() %>%
+                     addPolygons(data = countries,
+                                 fillColor = ~pal_pop(dataSet_year$pop),
+                                 fillOpacity = 0.8,
+                                 color = "darkgrey",
+                                 weight = 1.5,
+                                 popup = popup_pop)
+                 }
+               })
+  
   #observe changes in radio buttons, output the correct legend
   observeEvent(input$typeIn, 
     {
@@ -162,9 +230,9 @@ server <- function(input, output)
     {
       gapminder_data %>%
         filter(year == input$yearIn) %>%
-        select(country, continent, lifeExp, gdpPercap, pop) %>%
-        setnames(old=c("country","continent", "lifeExp", "gdpPercap", "pop"), 
-                 new=c("Country", "Continent", "Life Expectancy", "GDP/capita", "Population"))
+        select(country, continent, gdpPercap, lifeExp, pop) %>%
+        setnames(old=c("country","continent", "gdpPercap", "lifeExp", "pop"), 
+                 new=c("Country", "Continent", "GDP/capita", "Life Expectancy", "Population"))
     })
   
   #reactive function for the plot that filters the data based on year and selects the relevent variables
@@ -176,19 +244,30 @@ server <- function(input, output)
     })
   
   #a plot that uses a reactive function to update when there are changes in inputed year
-  output$Data <- renderPlot(
+  output$Data <- renderPlotly(
     {
         plot_data <- Filtered_forPlot()
         
-        plot_data %>%
-        ggplot(aes(gdpPercap, lifeExp, size = pop, color = continent)) +
-          geom_point() +
+        p<- plot_data %>%
+          ggplot(aes(gdpPercap, lifeExp, size = pop, color = continent, text = paste('</br> Country: ', country,
+                                                                                                   '</br> Continent: ', continent,
+                                                                                                   '</br> GDP/capita: ', gdpPercap,
+                                                                                                   '</br> Life Expectancy: ', lifeExp,
+                                                                                                   '</br> Population: ', pop))) +
+          geom_point(alpha = 0.9, shape = 21) +
           labs(x= "GDP/capita (USD)", y = "Life Expectancy (years)") +
           ggtitle(paste("GDP/capita vs Life Expectancy in ", input$yearIn)) +
           scale_size(range = c(2, 10)) +
-          scale_colour_discrete("Population") +
-          scale_colour_discrete("Continents")
+          theme(legend.title = element_blank())
+        ggplotly(p, tooltip = c("text")) %>% 
+          add_annotations(text="Continents", xref="paper", yref="paper",
+                                         x=1.02, xanchor="left",
+                                         y=0.8, yanchor="bottom",    
+                                         legendtitle=TRUE, showarrow=FALSE ) %>%
+          layout( legend=list(y=0.8, yanchor="top" )) %>% 
+          config(displayModeBar = F)
     })
+  
   
   #a table that uses a reactive function to update when there are changes in inputed year
   output$table_head <- DT::renderDataTable(
