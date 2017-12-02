@@ -1,0 +1,82 @@
+---
+title: "hw10"
+author: "Peter Whitman"
+date: "11/30/2017"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+library(gapminder)
+library(geonames)
+library(tidyverse)
+library(tidyr)
+library(magrittr)
+library(purrr)
+library(glue)
+library(stringr)
+library(rvest)
+library(xml2)
+library(ggplot2)
+library(countrycode)
+library(rebird)
+library(rplos)
+library(knitr)
+```
+
+# Use an R package that wraps an API
+
+I followed the first prompt. Specifically, I combined gapminder and geonames data to plot population density over time. 
+
+### 1. Make a user account and use geonames to access data about the world’s countries.
+
+```{r}
+options(geonamesUsername="pwhitman") 
+```
+
+### 2. Make a dataframe out of the country info data from geonames
+```{r}
+info <- GNcountryInfo()
+head(info)
+```
+
+### 3. Convert the country codes within the country info data frame to the english names they represent
+```{r}
+info_updated <- info %>%
+  mutate(country = countrycode(info$isoAlpha3, origin = "iso3c", destination = "country.name.en"))
+head(info_updated)
+```
+
+### 4. Join the geonames data to gapminder data by country
+
+```{r}
+country_joined <- left_join(gapminder, info_updated, by = "country")
+```
+
+### 5. Create a new variable for population density by dividing population by area in sqkm 
+```{r}
+refined <- country_joined %>%
+  mutate(area = as.numeric(areaInSqKm)) %>%
+  select(country, continent.x, year, lifeExp, gdpPercap, pop, capital, area) %>%
+  mutate(pop_density = pop/area)
+kable(head(refined))
+```
+
+### 6. Vizualize the change in population density over time for each country faceted by continent using ggplot
+```{r}
+p <- refined %>% 
+  #filter(continent.x != "Oceania") %>%
+  ggplot(aes(x = year, y = pop_density, group = country, color = country)) +
+  geom_line(lwd = 1, show.legend = FALSE) + 
+  facet_wrap(~ continent.x) +
+  labs(x = "Year", y = "Population Density (people/" ~ km^{2} ~ ")", title = "Changes in Population Density Over Time by Continent") +
+  scale_color_manual(values = country_colors) + 
+  theme_bw() +
+  theme(strip.text = element_text(size = rel(1.1))) + 
+  scale_y_log10()
+p
+```
+
+
+
+
+
